@@ -6,8 +6,11 @@ const app = express();
 const hostname = '127.0.0.1'
 const port = 3000
 
+app.use('/public', express.static(path.join(__dirname, 'public')))
+
 // default options
 app.use(fileUpload());
+
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'))
@@ -21,7 +24,7 @@ app.post('/upload', function(req, res) {
   let sampleFile = req.files.sampleFile;
 
   // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv('./imgs/filename.jpg', function(err) {
+  sampleFile.mv('./public/imgs/audio.mp3', function(err) {
     if (err)
       return res.status(500).send(err);
 
